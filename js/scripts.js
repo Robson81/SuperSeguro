@@ -3,7 +3,6 @@ const analisarRisco = () => {
     const imc = document.getElementById('imc').value;
     const display = document.getElementById('resultado');
 
-   
     if (imc > 0.7 && idade > 0.6) {
         display.className = "alert alert-danger";
         display.innerHTML = "<h4>Decisão: Risco Alto</h4>Recomendação: Negar apólice ou exigir exames cardíacos.";
@@ -11,9 +10,10 @@ const analisarRisco = () => {
         display.className = "alert alert-success";
         display.innerHTML = "<h4>Decisão: Risco Baixo</h4>Recomendação: Aprovação automática liberada.";
     }
+}; // Fechamento correto da função
 
-
-    async function carregarIndicadoresBI() {
+// Esta função DEVE estar fora para rodar no onload
+async function carregarIndicadoresBI() {
     try {
         const response = await fetch('get_dados.php');
         const indicadores = await response.json();
@@ -31,11 +31,8 @@ const analisarRisco = () => {
         document.getElementById('resultado-bi').innerHTML = html;
     } catch (error) {
         console.error("Erro ao carregar dados do SAD:", error);
+        document.getElementById('resultado-bi').innerHTML = "Erro ao conectar com o banco de dados.";
     }
 }
 
-// Chama a função ao carregar a página
 window.onload = carregarIndicadoresBI;
-
-
-}

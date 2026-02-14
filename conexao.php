@@ -1,7 +1,7 @@
 <?php
 $host = "localhost";
 $user = "root";
-$pass = ""; // Coloque a senha do seu MySQL se houver
+$pass = "MySQL@123"; 
 $db   = "super_seguro";
 
 try {
