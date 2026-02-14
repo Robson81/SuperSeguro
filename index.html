@@ -3,38 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SAD - Super Seguro</title>
-    <!-- Bootstrap CSS Direto (não depende de pasta local) -->
+    <title>SAD - Prudential Insurance</title>
+    
+    <!-- LINK CORRIGIDO: Note o caminho completo para o arquivo CSS -->
     <link href="https://cdn.jsdelivr.net" rel="stylesheet">
-
+    
     <style>
-        body { background-color: #f8f9fa; }
-        .card-header { background-color: #0d6efd; color: white; }
-        .status-badge { font-size: 1.2rem; }
+        body { background-color: #f4f7f6; }
+        .navbar { box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .card { border: none; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .card-header { font-weight: bold; }
     </style>
 </head>
 <body>
+
     <nav class="navbar navbar-dark bg-primary mb-4">
         <div class="container">
-            <a class="navbar-brand" href="#">SAD | Prudential Insurance</a>
+            <a class="navbar-brand" href="#">SAD | Prudential Life Insurance</a>
         </div>
     </nav>
 
     <div class="container">
         <div class="row g-4">
-            <!-- Lado Esquerdo: Formulário -->
+            <!-- Simulação -->
             <div class="col-md-5">
-                <div class="card shadow border-0">
-                    <div class="card-header">Simulador de Risco</div>
+                <div class="card">
+                    <div class="card-header bg-primary text-white">Simulador de Risco</div>
                     <div class="card-body">
                         <form id="formSAD">
                             <div class="mb-3">
                                 <label class="form-label">Idade Relativa (Ins_Age)</label>
-                                <input type="number" step="0.01" id="idade" class="form-control" placeholder="Ex: 0.64">
+                                <input type="number" step="0.01" class="form-control" id="idade" placeholder="Ex: 0.64">
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">IMC (BMI)</label>
-                                <input type="number" step="0.01" id="imc" class="form-control" placeholder="Ex: 0.48">
+                                <input type="number" step="0.01" class="form-control" id="imc" placeholder="Ex: 0.48">
                             </div>
                             <button type="button" onclick="analisarRisco()" class="btn btn-primary w-100">Avaliar Proposta</button>
                         </form>
@@ -42,14 +45,15 @@
                 </div>
             </div>
 
-            <!-- Lado Direito: BI/OLAP -->
+            <!-- Dashboard BI -->
             <div class="col-md-7">
-                <div class="card shadow border-0">
-                    <div class="card-header bg-dark">Indicadores Estratégicos (Data Warehouse)</div>
-                    <div class="card-body">
+                <div class="card">
+                    <div class="card-header bg-dark text-white">Indicadores Estratégicos (Data Warehouse)</div>
+                    <div class="card-body text-center">
                         <div id="resultado" class="mb-3"></div>
                         <div id="resultado-bi">
-                            <p class="text-muted">Carregando métricas do banco de dados...</p>
+                            <div class="spinner-border text-primary" role="status"></div>
+                            <p class="mt-2">Carregando métricas do banco de dados...</p>
                         </div>
                     </div>
                 </div>
@@ -57,6 +61,7 @@
         </div>
     </div>
 
+    <!-- Script local -->
     <script src="js/scripts.js"></script>
 </body>
 </html>
