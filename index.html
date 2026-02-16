@@ -3,23 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SAD - Prudential Insurance</title>
+    <title>SAD - Super Seguro</title>
     
-    <!-- LINK CORRIGIDO: Note o caminho completo para o arquivo CSS -->
-    <link href="https://cdn.jsdelivr.net" rel="stylesheet">
-    
-    <style>
-        body { background-color: #f4f7f6; }
-        .navbar { box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-        .card { border: none; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
-        .card-header { font-weight: bold; }
-    </style>
+   <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="css/estilo.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com">
+
 </head>
 <body>
 
     <nav class="navbar navbar-dark bg-primary mb-4">
         <div class="container">
-            <a class="navbar-brand" href="#">SAD | Prudential Life Insurance</a>
+            <a class="navbar-brand" href="#">SAD | <span class="danger"> Super Seguro - Seguradora </span></a>
         </div>
     </nav>
 
@@ -32,14 +31,17 @@
                     <div class="card-body">
                         <form id="formSAD">
                             <div class="mb-3">
-                                <label class="form-label">Idade Relativa (Ins_Age)</label>
-                                <input type="number" step="0.01" class="form-control" id="idade" placeholder="Ex: 0.64">
+                                <label class="form-label">Idade (anos)</label>
+                                <input type="number" step="0.01" class="form-control" id="idade" placeholder="Ex: 64">
                             </div>
                             <div class="mb-3">
-                                <label class="form-label">IMC (BMI)</label>
-                                <input type="number" step="0.01" class="form-control" id="imc" placeholder="Ex: 0.48">
+                                <label class="form-label">IMC (kg/m²)</label>
+                                <input type="number" step="0.01" class="form-control" id="imc" placeholder="Ex: 25.00">
                             </div>
                             <button type="button" onclick="analisarRisco()" class="btn btn-primary w-100">Avaliar Proposta</button>
+
+                            <button type="button" onclick="limparHistorico()" class="btn btn-outline-danger btn-sm w-100 mt-2">Nova Pesquisa</button>
+
                         </form>
                     </div>
                 </div>
@@ -51,6 +53,11 @@
                     <div class="card-header bg-dark text-white">Indicadores Estratégicos (Data Warehouse)</div>
                     <div class="card-body text-center">
                         <div id="resultado" class="mb-3"></div>
+                            <select id="olap-dimensao" class="form-control form-control-sm mb-3" onchange="carregarDashboard()">
+                            <option value="recentes">Visão Tática: Últimos Registros</option>
+                            <option value="faixa_idade">Visão Estratégica: Média de Risco por Idade</option>
+                            </select>
+
                         <div id="resultado-bi">
                             <div class="spinner-border text-primary" role="status"></div>
                             <p class="mt-2">Carregando métricas do banco de dados...</p>
