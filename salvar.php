@@ -2,7 +2,9 @@
 include 'conexao.php';
 header('Content-Type: application/json');
 
-$dados = json_decode(file_get_contents('php://input'), true);
+
+$json = file_get_contents('php://input');
+$dados = json_decode($json, true);
 
 if ($dados) {
     try {
@@ -12,15 +14,17 @@ if ($dados) {
         
         $stmt = $pdo->prepare($sql);
         $stmt->execute([
-            ':idade' => $dados['idade'],
+            ':idade' => $dados['idade'], 
             ':imc'   => $dados['imc'],
             ':risco' => $dados['risco']
         ]);
 
         echo json_encode(["status" => "sucesso"]);
     } catch (PDOException $e) {
+    
         echo json_encode(["status" => "erro", "mensagem" => $e->getMessage()]);
     }
+} else {
+    echo json_encode(["status" => "erro", "mensagem" => "Dados não recebidos"]);
 }
 ?>
-

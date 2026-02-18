@@ -12,4 +12,3 @@ try {
     die(json_encode(["status" => "erro", "mensagem" => "Falha na conexão: " . $e->getMessage()]));
 }
 ?>
-

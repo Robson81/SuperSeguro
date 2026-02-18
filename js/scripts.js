@@ -23,7 +23,8 @@ async function carregarDashboard() {
             html += `</tr></thead><tbody>`;
 
             dados.forEach(item => {
-                const idadeExibicao = (parseFloat(item.faixa_idade) * 100).toFixed(0);
+                const idadeExibicao = parseFloat(item.faixa_idade).toFixed(0);
+                //const idadeExibicao = (parseFloat(item.faixa_idade) * 100).toFixed(0);
                 const riscoExibicao = parseFloat(item.media_risco).toFixed(2);
 
                 html += `<tr class="border-top">
@@ -83,9 +84,29 @@ function analisarRisco() {
 
     divResultado.innerHTML = `<div class="alert ${alertClass} font-weight-bold mb-0">${mensagem}</div>`;
 
-    const idadeParaBanco = idade / 100;
-    const imcParaBanco = imc / 100;
+    //const idadeParaBanco = idade / 100;
+    //const imcParaBanco = imc / 100;
 
+    
+
+
+    fetch('salvar.php', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json' // ESSA LINHA É OBRIGATÓRIA
+    },
+    body: JSON.stringify({
+        idade: idade,
+        imc: imc,
+        risco: risco
+    })
+}).then(() => {
+        carregarDashboard(); 
+        document.getElementById('formSAD').reset(); 
+    });
+}
+
+/*
     fetch('salvar.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -98,7 +119,7 @@ function analisarRisco() {
         carregarDashboard(); 
         document.getElementById('formSAD').reset(); 
     });
-}
+}*/
 
 async function limparHistorico() {
     if (confirm("Deseja realmente apagar todo o histórico do Data Warehouse?")) {
